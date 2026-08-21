@@ -1,0 +1,148 @@
+<!doctype html>
+<html lang="zh-CN">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta name="description" content="Humanoid Atlas：国内外人形机器人公司、产品与官网导航，一站式检索与跳转。" />
+    <meta name="theme-color" content="#f3f1ea" />
+    <meta property="og:title" content="Humanoid Atlas · 人形机器人网址导航" />
+    <meta property="og:description" content="结构清晰、持续更新的人形机器人公司与产品网址汇总。" />
+    <title>Humanoid Atlas · 人形机器人网址导航</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=DM+Mono:wght@400;500&family=Manrope:wght@400;500;600;700&family=Noto+Sans+SC:wght@400;500;600;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+  </head>
+  <body>
+    <div class="noise" aria-hidden="true"></div>
+    <header class="site-header">
+      <a class="brand" href="#top" aria-label="返回首页">
+        <span class="brand-mark" aria-hidden="true"><i></i><i></i><i></i><i></i></span>
+        <span>HUMANOID <b>ATLAS</b></span>
+      </a>
+      <nav aria-label="主导航">
+        <a href="#directory">机器人目录</a>
+        <a href="#about">关于本站</a>
+        <a class="github-link" href="README.md">部署指南 <span>↗</span></a>
+      </nav>
+    </header>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-copy">
+          <p class="eyebrow"><span></span> HUMANOID ROBOT DIRECTORY · 2026</p>
+          <h1>探索人形机器人<br /><em>正在发生的未来</em></h1>
+          <p class="intro">汇集国内外人形机器人企业与产品官网。一个清晰、开放、持续生长的行业入口。</p>
+          <a class="primary-button" href="#directory">开始探索 <span>↓</span></a>
+        </div>
+        <div class="hero-visual" aria-hidden="true">
+          <div class="orbit orbit-one"></div>
+          <div class="orbit orbit-two"></div>
+          <div class="robot-figure">
+            <div class="robot-head"><span></span></div>
+            <div class="robot-neck"></div>
+            <div class="robot-body"><span class="core"></span><i></i><i></i></div>
+            <div class="robot-arm left"><i></i></div>
+            <div class="robot-arm right"><i></i></div>
+            <div class="robot-leg left"><i></i></div>
+            <div class="robot-leg right"><i></i></div>
+          </div>
+          <span class="datum d1">01 / 32 DOF</span>
+          <span class="datum d2">BIPEDAL SYSTEM</span>
+          <span class="datum d3">STATUS · ONLINE</span>
+        </div>
+      </section>
+
+      <section class="metrics" aria-label="目录概览">
+        <div><strong id="totalCount">—</strong><span>收录站点</span></div>
+        <div><strong id="chinaCount">—</strong><span>中国企业</span></div>
+        <div><strong id="globalCount">—</strong><span>海外企业</span></div>
+        <div><strong>持续</strong><span>维护更新</span></div>
+      </section>
+
+      <section class="directory" id="directory">
+        <div class="section-heading">
+          <div>
+            <p class="eyebrow"><span></span> THE DIRECTORY</p>
+            <h2>机器人目录</h2>
+          </div>
+          <p>从公司、产品或应用场景开始检索。<br />点击卡片即可访问官方网站。</p>
+        </div>
+
+        <div class="toolbar">
+          <label class="search-box">
+            <span aria-hidden="true"></span>
+            <input id="searchInput" type="search" placeholder="搜索公司、机器人或关键词…" autocomplete="off" />
+            <kbd>⌘ K</kbd>
+          </label>
+          <div class="filters" aria-label="目录筛选">
+            <select id="regionFilter" aria-label="按地区筛选">
+              <option value="all">全部地区</option>
+              <option value="china">中国</option>
+              <option value="global">海外</option>
+            </select>
+            <select id="sceneFilter" aria-label="按方向筛选">
+              <option value="all">全部方向</option>
+              <option value="通用">通用人形</option>
+              <option value="工业">工业制造</option>
+              <option value="科研">科研教育</option>
+              <option value="服务">商业服务</option>
+            </select>
+            <button id="clearButton" type="button" hidden>清除筛选</button>
+          </div>
+        </div>
+
+        <div class="result-line">
+          <span><b id="resultCount">0</b> 个结果</span>
+          <span class="line"></span>
+          <button id="viewToggle" type="button" aria-label="切换紧凑视图" aria-pressed="false"><i></i><i></i><i></i><i></i></button>
+        </div>
+
+        <div class="robot-grid" id="robotGrid"></div>
+        <div class="empty-state" id="emptyState" hidden>
+          <span>∅</span>
+          <h3>没有找到匹配结果</h3>
+          <p>换个关键词，或清除筛选条件后再试。</p>
+          <button type="button" id="emptyClear">查看全部</button>
+        </div>
+      </section>
+
+      <section class="about" id="about">
+        <div>
+          <p class="eyebrow light"><span></span> OPEN DIRECTORY</p>
+          <h2>看见机器人的<br />每一种可能</h2>
+        </div>
+        <div class="about-copy">
+          <p>Humanoid Atlas 是一个面向研究者、开发者与机器人爱好者的开放导航项目。我们只收录官方站点，帮助你减少搜索噪音，更快抵达可靠的一手信息。</p>
+          <p class="note">站点信息会随企业发布动态发生变化，产品阶段仅作快速索引，请以各公司官网为准。</p>
+        </div>
+      </section>
+    </main>
+
+    <footer>
+      <a class="brand footer-brand" href="#top"><span class="brand-mark"><i></i><i></i><i></i><i></i></span><span>HUMANOID <b>ATLAS</b></span></a>
+      <p>Open directory for the humanoid age.</p>
+      <span>© <span id="year"></span> · BUILT FOR EXPLORERS</span>
+    </footer>
+
+    <template id="cardTemplate">
+      <article class="robot-card">
+        <div class="card-top">
+          <span class="index"></span>
+          <span class="country"></span>
+        </div>
+        <div class="monogram" aria-hidden="true"></div>
+        <div class="card-content">
+          <div class="card-title"><h3></h3><span class="stage"></span></div>
+          <p class="product"></p>
+          <p class="description"></p>
+          <div class="tags"></div>
+        </div>
+        <a class="visit" target="_blank" rel="noopener noreferrer" aria-label="访问官方网站">访问官网 <span>↗</span></a>
+      </article>
+    </template>
+
+    <script src="data.js"></script>
+    <script src="app.js"></script>
+  </body>
+</html>
