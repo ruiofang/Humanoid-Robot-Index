@@ -86,4 +86,81 @@
   });
 
   render();
+
+  // Lightweight animated network background. It pauses for reduced-motion users.
+  const canvas = document.querySelector("#networkCanvas");
+  const context = canvas?.getContext("2d");
+  const reducedMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+  if (canvas && context && !reducedMotion) {
+    let width = 0;
+    let height = 0;
+    let points = [];
+    let animationFrame;
+    const pointer = { x: -1000, y: -1000 };
+
+    const resize = () => {
+      const ratio = Math.min(window.devicePixelRatio || 1, 2);
+      width = window.innerWidth;
+      height = window.innerHeight;
+      canvas.width = width * ratio;
+      canvas.height = height * ratio;
+      canvas.style.width = `${width}px`;
+      canvas.style.height = `${height}px`;
+      context.setTransform(ratio, 0, 0, ratio, 0, 0);
+      const count = Math.min(80, Math.max(32, Math.floor(width / 20)));
+      points = Array.from({ length: count }, () => ({
+        x: Math.random() * width,
+        y: Math.random() * height,
+        vx: (Math.random() - .5) * .18,
+        vy: (Math.random() - .5) * .18,
+        size: Math.random() * 1.2 + .35
+      }));
+    };
+
+    const draw = () => {
+      context.clearRect(0, 0, width, height);
+      points.forEach((point, index) => {
+        point.x += point.vx;
+        point.y += point.vy;
+        if (point.x < -20 || point.x > width + 20) point.vx *= -1;
+        if (point.y < -20 || point.y > height + 20) point.vy *= -1;
+        const pointerDistance = Math.hypot(point.x - pointer.x, point.y - pointer.y);
+        if (pointerDistance < 150) {
+          point.x += (point.x - pointer.x) * .002;
+          point.y += (point.y - pointer.y) * .002;
+        }
+        context.beginPath();
+        context.fillStyle = index % 6 === 0 ? "rgba(174,255,95,.62)" : "rgba(136,121,255,.48)";
+        context.arc(point.x, point.y, point.size, 0, Math.PI * 2);
+        context.fill();
+        for (let next = index + 1; next < points.length; next++) {
+          const other = points[next];
+          const distance = Math.hypot(point.x - other.x, point.y - other.y);
+          if (distance < 105) {
+            context.beginPath();
+            context.strokeStyle = `rgba(133,119,255,${(1 - distance / 105) * .09})`;
+            context.lineWidth = .5;
+            context.moveTo(point.x, point.y);
+            context.lineTo(other.x, other.y);
+            context.stroke();
+          }
+        }
+      });
+      animationFrame = requestAnimationFrame(draw);
+    };
+
+    window.addEventListener("resize", resize, { passive: true });
+    window.addEventListener("pointermove", event => {
+      pointer.x = event.clientX;
+      pointer.y = event.clientY;
+      document.documentElement.style.setProperty("--mouse-x", `${event.clientX}px`);
+      document.documentElement.style.setProperty("--mouse-y", `${event.clientY}px`);
+    }, { passive: true });
+    document.addEventListener("visibilitychange", () => {
+      if (document.hidden) cancelAnimationFrame(animationFrame);
+      else draw();
+    });
+    resize();
+    draw();
+  }
 })();
